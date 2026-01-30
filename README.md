@@ -1,14 +1,18 @@
-# Calculadora Nutricional em Java
+# 🥗 Calculadora Nutricional em Java
 
-Projeto simples em Java para cálculo de:
-- IMC (Índice de Massa Corporal)
-- Taxa Metabólica Basal (TMB)
-- Consumo mínimo diário de água
+Projeto desenvolvido em **Java** com o objetivo de validar dados corporais como **peso, altura e idade**, servindo como base para uma calculadora nutricional simples.
 
-## Tecnologias
+O foco do projeto é a **organização do código**, uso correto de **métodos**, **validação de entradas** e aplicação de boas práticas de programação orientada a objetos.
+
+## 🚀 Funcionalidades
+- Validação de peso
+- Validação de altura (em metros e centímetros)
+- Validação de idade
+- Retorno booleano para controle de fluxo do programa
+
+## 🛠️ Tecnologias utilizadas
 - Java
-- Scanner (entrada de dados)
-- Programação Orientada a Objetos (básico)
+- Programação Orientada a Objetos (POO)
 
-## Objetivo
-Projeto de estudo para praticar lógica, métodos e organização de código em Java.
+## 🎯 Objetivo
+Projeto educacional voltado para **aprendizado em Java**, reforçando conceitos de lógica, estruturação de código e reutilização de métodos.
