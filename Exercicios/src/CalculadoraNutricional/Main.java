@@ -1,6 +1,5 @@
 package CalculadoraNutricional;
-//Calculadora de IMC
-//peso / altura**2
+
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -8,48 +7,101 @@ import static CalculadoraNutricional.Calculos.*;
 
 public class Main {
     public static void main(String[] args) {
-        //padroniza o leitor
+
         Locale.setDefault(Locale.US);
+        Scanner scanner = new Scanner(System.in);
+        Verificador verificador = new Verificador();
 
         System.out.println("Bem vindo(a) a sua calculadora nutricional");
-        System.out.println("escolha uma opção digitando o numero correspondente");
 
-        //ativar o scanner
-        var scanner = new Scanner(System.in);
-        System.out.println("1 - IMC \n2 - Quantiade de agua minima \n3 - TMB mínimo");
-        int resposta = scanner.nextInt();
-        if (resposta == 1) {
-            //ler o peso
-            System.out.println("Digite seu peso: ");
-            var peso = scanner.nextDouble();
-            //ler a altura
-            System.out.println("Digite sua altura(Ex; 1.67): ");
-            var altura = scanner.nextDouble();
-            double imc = Imc(peso, altura);
-            System.out.println("Seu IMC é: " + imc);
-        } else if (resposta == 2) {
-            //ler peso
-            System.out.println("Digite seu peso: ");
-            var peso = scanner.nextDouble();
-            double aguaMin = AguaMin(peso);
-            System.out.println(aguaMin);
-        } else if (resposta == 3) {
-            //ler o peso
-            System.out.println("Digite seu peso: ");
-            var peso = scanner.nextDouble();
-            //ler o idade
-            System.out.println("Digite sua idade: ");
-            var idade = scanner.nextDouble();
-            //ler a altura
-            System.out.println("Digite sua altura em cm(Ex; 167): ");
-            var altura = scanner.nextDouble();
-            //verifica o genero
-            System.out.println("Qual seu genero? \n1 - masculino \n2 - feminino");
-            var genero = scanner.nextInt();
-            double tmb = Tmb(peso, idade, altura, genero);
-            System.out.println(tmb);
-        } else {
-            System.out.println("escolha uma opção");
+        while (true) {
+            System.out.println("1 - IMC \n2 - Quantidade de agua minima \n3 - TMB minimo\n4 - Sair");
+
+            try {
+                int resposta = scanner.nextInt();
+
+                if (resposta == 1) {
+
+                    System.out.println("Digite seu peso: ");
+                    double peso = scanner.nextDouble();
+                    while (!verificador.peso(peso)) {
+                        System.out.println("Digite seu peso: ");
+                        peso = scanner.nextDouble();
+                    }
+
+                    System.out.println("Digite sua altura (Ex: 1.67): ");
+                    double altura = scanner.nextDouble();
+                    while (!verificador.altura(altura)) {
+                        System.out.println("Digite sua altura: ");
+                        altura = scanner.nextDouble();
+                    }
+
+                    double imc = Imc(peso, altura);
+                    System.out.println("Seu IMC é: " + imc);
+
+                } else if (resposta == 2) {
+
+                    System.out.println("Digite seu peso: ");
+                    double peso = scanner.nextDouble();
+                    while (!verificador.peso(peso)) {
+                        System.out.println("Digite seu peso: ");
+                        peso = scanner.nextDouble();
+                    }
+
+                    double aguaMin = AguaMin(peso);
+                    System.out.println(aguaMin);
+
+                } else if (resposta == 3) {
+
+                    System.out.println("Digite seu peso: ");
+                    double peso = scanner.nextDouble();
+                    while (!verificador.peso(peso)) {
+                        System.out.println("Digite seu peso: ");
+                        peso = scanner.nextDouble();
+                    }
+
+                    System.out.println("Digite sua idade: ");
+                    int idade = scanner.nextInt();
+                    while (!verificador.idade(idade)) {
+                        System.out.println("Digite sua idade: ");
+                        idade = scanner.nextInt();
+                    }
+
+                    System.out.println("Digite sua altura em cm: ");
+                    int altura = scanner.nextInt();
+                    while (!verificador.alturaCm(altura)) {
+                        System.out.println("Digite sua altura em cm: ");
+                        altura = scanner.nextInt();
+                    }
+
+                    System.out.println("Qual seu genero? \n1 - masculino \n2 - feminino");
+                    int genero = scanner.nextInt();
+
+                    System.out.println("""
+                            Escolha a alternativa:
+                            1 - Sedentario
+                            2 - Levemente ativo
+                            3 - Moderadamente ativo
+                            4 - Muito ativo
+                            5 - Extremamente ativo
+                            """);
+
+                    int escolha = scanner.nextInt();
+                    double tmb = Tmb(peso, idade, altura, genero, escolha);
+                    System.out.println("A quantidade minima é " + tmb);
+
+                } else if (resposta == 4) {
+                    System.out.println("Saindo...");
+                    scanner.close();
+                    break;
+                } else {
+                    System.out.println("Escolha uma opcao valida");
+                }
+
+            } catch (Exception e) {
+                System.out.println("Entrada invalida");
+                scanner.nextLine();
+            }
         }
     }
 }
